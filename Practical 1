@@ -1,0 +1,199 @@
+/*Design and develop inheritance for a given case study, identify objects and relationships and
+implement inheritance wherever applicable. Employee class hasEmp_name, Emp_id, Address, Mail_id,
+and Mobile_noas members. Inherit the classes: Programmer, Team Lead, Assistant Project
+Manager and Project Manager from employee class. Add Basic Pay (BP) as the member of all the
+inherited classes with 97% of BP as DA, 10 % of BP as HRA, 12% of BP as PF, 0.1% of BP for staff
+club fund. Generate pay slips for the employees with their gross and net salary. */
+
+
+
+import java.util.Scanner;
+class main {            //create a class name main.java
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        publication technical = new publication();
+        Book java = new Book();
+        Book C=new Book();
+        Magzine business = new Magzine();
+        while (true) {
+            System.out.println("\nChoose an option:");
+            System.out.println("1. Accept and Display Publication");
+            System.out.println("2. Accept and Display Book Details");
+            System.out.println("3. Accept and Display Magazine Details");
+            System.out.println("4. Order and Sale of Book");
+            System.out.println("5. Current Issue and Received Issue of Magazine");		
+            System.out.println("6. Exit");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    technical.acceptP();
+                    technical.displayP();
+                    break;
+                case 2:
+                    java.accept();
+                    java.display();
+                    break;
+                case 3:
+                     technical.accept();
+                     technical.display();
+                    break;
+                case 4:
+                    java.accept();
+                    java.display();
+                    int order = java.orderCopy();
+                    java.saleCopy(order);
+                    C.accept();
+                    C.display();
+                    int orderC=C.orderCopy();
+                    technical.saleCopy(order+orderC);
+                    break;
+                case 5:
+                    business.accept();
+                    int current =   business.currentIssued();
+                    business.receivedIssue(current);
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
+class publication {        //create a new class name publication.java
+    String Ptitle;
+    String title;
+    public int price;
+    public int copy;
+    String name;
+    public publication() {
+    }
+   public publication(String title, int price, int copy) {
+        this.Ptitle = Ptitle;
+        this.title = title;
+        this.price = price;
+        this.copy = copy;
+    }
+     public void accept() {
+	        Scanner sc = new Scanner(System.in);
+	        System.out.println("Enter title of "+this.name);
+	        this.title = sc.nextLine();
+	        System.out.println("Enter copies of " + this.name );
+	        this.copy = sc.nextInt();
+	        System.out.println("Enter price of "+this.name );
+	        this.price = sc.nextInt();
+	    }
+	    public void display() {
+	        System.out.println("Title: " + this.title);
+	        System.out.println("Price: " + this.price);
+	    }
+    
+    
+    public void acceptP() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter name of Publication");
+        this.Ptitle = sc.nextLine();
+    }
+    public void displayP() {
+        System.out.println("Publication Title: " + this.Ptitle);
+    }
+    public int saleCopy(int orders){
+        System.out.println("Total sale of publication " + orders);
+        return orders;
+    }
+}
+	class Book extends publication{     //create a new class name Book.java
+	    private String author;
+	    public Book() {
+	    }
+	    public Book(String author) {
+	        this.author = author;
+	        this.name= "Book";
+	    }
+	@Override
+     void accept() {
+        super.accept();
+        System.out.println("Enter name of author");
+	        this.author = sc.nextLine();
+    }
+    @Override
+     void display() {
+        super.display();
+        System.out.println("Author: " + this.author);
+    }
+}
+	    public int orderCopy() {
+	        Scanner sc = new Scanner(System.in);
+	        System.out.println("Enter number of copies of " + this.title + " to order");
+	        int order = sc.nextInt();
+	        if(order <= copy) {
+	            this.copy -= order;
+	            System.out.println("Total orders of book " + this.author + " " + order);
+	        }
+	        else{
+	            System.out.println("Insufficient copies");
+	        }
+	         return order;
+	    }
+	    public int saleCopy(int orders){
+	        if(orders <= copy) {
+	            System.out.println("Total books of " + this.title + " sold " + orders);
+	        }
+	        return orders;
+	    }
+	}
+class Magzine extends publication {      //create a new class name Magzine.java
+    public Magzine() {
+        super();
+    }
+    
+    public void orderCopy() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of copies to order");
+         int orders = sc.nextInt();
+        if(orders <= copy) {
+            copy-=orders;
+            System.out.println("Total order of Magazine : "+ this.title + " are " + orders);
+        }
+        else {
+            System.out.println("Insufficient copies");
+        }
+    }
+    public int currentIssued() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of copies of " + this.title + " to issue");
+        int current = sc.nextInt();
+        sc.nextLine();  // Consume the newline left-over
+        System.out.println("Enter date of issue in dd/mm/yyyy format");
+        String date = sc.nextLine();
+        System.out.println("Date of Issue of " + this.title + ": " + date);
+        if (current <= this.copy) {
+            this.copy -= current;
+            System.out.println("Total Magazines issued: " + current);
+        } else {
+            System.out.println("Insufficient Magazines");
+        }
+        return current;
+    }
+    public void receivedIssue(int current) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter total received copies of " + this.title);
+        int received = sc.nextInt();
+        sc.nextLine();  // Consume the newline left-over
+        System.out.println("Enter date of received in dd/mm/yyyy format");
+        String date = sc.nextLine();
+        if (received < current) {
+            System.out.println("Received Date of " + this.title + ": " + date);
+            System.out.println("Magazines yet to be received: " + (current - received));
+        }
+        else {
+            System.out.println("Received Date of " + this.title + ": " + date);
+        }
+        this.copy+=received;
+    }
+    public int saleCopy(int orders){
+        System.out.println("Total magazine " + this.title + " sold " + orders  );
+        return orders;
+    }
+}
