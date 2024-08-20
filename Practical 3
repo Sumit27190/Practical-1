@@ -1,0 +1,88 @@
+INPUT
+
+//Sumit Kapse
+//SIT30
+
+/*Design a base class shape with two double type values and member functions to input the data and
+compute_area() for calculating area of figure. Derive two classes’ triangle and rectangle. Make
+compute_area() as abstract function and redefine this function in the derived class to suit their
+requirements. Write a program that accepts dimensions of triangle/rectangle and display calculated area.
+Implement dynamic binding for given case study.*/
+
+import java.util.Scanner;
+
+public class Proj4 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n;
+		System.out.println("Enter 1 for triangle ");
+		System.out.println("Enter 2 for rectangle ");
+		n=sc.nextInt();
+		rectangle r=new rectangle();                 //object of class rectangle created
+		triangle t=new triangle();                   //object of class triangle created
+		switch(n)
+		{
+		case 1:
+		t.getData();
+		t.compute_area();
+		break;
+		case 2:
+		r.getData();
+		r.compute_area();
+		break;
+		}
+		
+	}
+
+}
+abstract class shape{
+	double a;
+	double b;
+	double area;
+	abstract void getData();
+	abstract void compute_area();
+}
+class triangle extends shape{
+	Scanner sc=new Scanner(System.in);
+	@Override
+	void getData() {
+		System.out.println("Enter the base of the triangle :");
+		a=sc.nextInt();
+		System.out.println("Enter the height of the triangle :");
+		b=sc.nextInt();
+	}
+	void compute_area() {
+		System.out.println("Area :"+(0.5*(a*b)));
+	}
+	
+}
+class rectangle extends shape{
+	Scanner sc=new Scanner(System.in);
+	@Override
+	void getData() {
+		System.out.println("Enter the length of the rectangle :");
+		a=sc.nextInt();
+		System.out.println("Enter the width of the rectangle :");
+		b=sc.nextInt();
+	}
+	void compute_area() {
+		System.out.println("Area :"+(a*b));
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
