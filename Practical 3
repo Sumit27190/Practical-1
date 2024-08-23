@@ -1,0 +1,47 @@
+package project121;
+import java.util.*;
+class exception {
+
+	public static void main(String[] args) {
+		Scanner sc =new Scanner(System.in);
+		int [] arr=new int[2];
+		try {	
+		
+		    for(int i=0;i<=3;i++) {
+			arr[i]=sc.nextInt();
+		}
+	    }
+	    catch(ArrayIndexOutOfBoundsException a) {
+		System.out.println(a);
+	    }
+		try {
+			 int num1=arr[0]/arr[1];
+				System.out.println("arr[0]/arr[1]="+ num1);
+		}
+		catch(ArithmeticException b) {
+			System.out.println(b);
+			}
+		try {
+			System.out.println("enter a number" );
+
+			int num=Integer.parseInt(sc.next());
+		}
+		catch(NumberFormatException c) {
+			System.out.println(c);
+
+		}
+		try {
+			System.out.println("displaying null pointer exception" );
+
+			int num=(Integer) null;
+			System.out.println(num);
+
+		}
+		catch(NullPointerException d) {
+			System.out.println(d);
+
+		}
+
+		}
+	
+	}
